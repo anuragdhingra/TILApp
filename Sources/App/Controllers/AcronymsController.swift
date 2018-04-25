@@ -30,7 +30,7 @@ struct AcronymController: RouteCollection {
     }
     
     func updateHandler(_ req: Request) throws ->  Future<Acronym> {
-        return try flatMap(to: Acronym.self, req.parameter(Acronym.self), req.content.decode(Acronym.self)) { acronym, updatedAcronym in
+        return try flatMap(to: Acronym.self, req.parameters.next(Acronym.self), req.content.decode(Acronym.self)) { acronym, updatedAcronym in
             acronym.short = updatedAcronym.short
             acronym.long = updatedAcronym.long
             return acronym.save(on: req)

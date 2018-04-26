@@ -15,3 +15,9 @@ final class User: Codable {
 extension User: SQLiteModel {}
 extension User: Content {}
 extension User: Migration {}
+
+extension User {
+    var acronyms: Children<User, Acronym> {
+        return children(\.creatorID)
+    }
+}
